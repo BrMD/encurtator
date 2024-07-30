@@ -13,4 +13,8 @@ export class HeaderComponent {
   onShortenedList() {
     this.router.navigate(['shortenedList'], { relativeTo: this.route });
   }
+
+  onHome() {
+    this.router.navigate(['']);
+  }
 }
