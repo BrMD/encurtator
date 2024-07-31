@@ -7,4 +7,9 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./encurtator/encurtator.module').then((m) => m.EncurtatorModule),
   },
+  {
+    path: 'pages',
+    loadChildren: () =>
+      import('./pages/pages.module').then((m) => m.PagesModule),
+  },
 ];
