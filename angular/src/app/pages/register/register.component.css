@@ -2,3 +2,36 @@
   border: none;
   cursor: pointer;
 }
+
+.main {
+  margin: 0;
+  padding: 0;
+  background-color: #303030;
+  min-width: 100vw;
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.formRegister {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.formRegister label {
+  margin: 0.5em 0 0.5em 0;
+}
+
+.message {
+  margin: 2em 0 0 0;
+}
+
+.message button {
+  border: none;
+  cursor: pointer;
+  background-color: inherit;
+  color: #019aa5;
+}

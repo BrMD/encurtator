@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PageLayoutComponent } from '../../encurtator/layout/page-layout/page-layout.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [],
+  imports: [PageLayoutComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
