@@ -59,9 +59,9 @@ public class EncurtatorController {
         return encurtatorService.createUser(userDto);
     }
 
-    @GetMapping("/teste/user")
-        public UserDto getUsers(@RequestBody UserDto userDto) throws Exception{
-            return encurtatorService.getUsers(userDto);
+    @GetMapping("/login/user")
+        public UserDto login(@RequestBody UserDto userDto) throws Exception{
+            return encurtatorService.login(userDto);
         }
     
 }

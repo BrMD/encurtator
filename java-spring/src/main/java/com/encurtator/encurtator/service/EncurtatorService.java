@@ -107,7 +107,7 @@ public class EncurtatorService {
         return userMapper.toDto(u);
     }
 
-    public UserDto getUsers(@RequestBody UserDto userDto) throws Exception{
+    public UserDto login(@RequestBody UserDto userDto) throws Exception{
         User user =  userRepository.findByEmail(userDto.email());
         String p1 = HashUtils.toHexString(user.getPassword());
         String p2 = HashUtils.toHexString(HashUtils.getSha(userDto.password()));

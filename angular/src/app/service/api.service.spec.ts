@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { EncurtatorService } from './encurtator.service';
+import { ApiService } from './api.service';
 
-describe('EncurtatorService', () => {
-  let service: EncurtatorService;
+describe('ApiService', () => {
+  let service: ApiService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(EncurtatorService);
+    service = TestBed.inject(ApiService);
   });
 
   it('should be created', () => {
