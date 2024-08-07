@@ -1,12 +1,33 @@
 <app-page-layout>
   <main class="main">
-    <form class="formRegister">
+    <form
+      [formGroup]="formRegister"
+      (ngSubmit)="onSubmitLogin()"
+      class="formRegister"
+    >
       <label>E-mail</label>
-      <input />
+      <input formControlName="email" />
+      @if (email.touched) {
+      <label *ngIf="email?.hasError('required')"> this field is required</label>
+      <label *ngIf="email?.hasError('email')"> please put a valid email</label>
+      }
       <label>Password</label>
-      <input />
-      <label>Confirm password</label>
-      <input />
+      <input formControlName="password" />
+      @if (password.touched) {
+      <label *ngIf="password?.hasError('required')">
+        this field is required </label
+      >}
+      <label> Confirm Password</label>
+      <input formControlName="confirmPassword" />
+      @if (confirmPassword.touched) {
+      <label *ngIf="confirmPassword?.hasError('required')">
+        this field is required
+      </label>
+      <label *ngIf="formRegister.errors?.['PasswordNoMatch']">
+        Password does'nt match.
+      </label>
+      }
+      <button>enviar</button>
     </form>
     <div class="message">
       <span>Already have an account? </span>

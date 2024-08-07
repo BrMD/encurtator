@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { PageLayoutComponent } from '../../encurtator/layout/page-layout/page-layout.component';
 import {
   FormControl,
-  FormGroup,
   NonNullableFormBuilder,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Login } from '../../models/login';
+import { Account } from '../../models/account';
 import { ApiService } from '../../service/api.service';
 import { NgIf } from '@angular/common';
 @Component({
@@ -18,10 +17,9 @@ import { NgIf } from '@angular/common';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     private formBuilder: NonNullableFormBuilder,
     private service: ApiService
   ) {}
@@ -42,11 +40,9 @@ export class LoginComponent implements OnInit {
     return this.formLogin.get('password') as FormControl;
   }
 
-  ngOnInit(): void {}
-
   onSubmitLogin() {
     if (this.formLogin.valid) {
-      const loginData: Login = {
+      const loginData: Account = {
         email: this.formLogin.get('email')!.value!,
         password: this.formLogin.get('password')!.value!,
       };
