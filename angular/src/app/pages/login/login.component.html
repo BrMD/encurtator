@@ -7,8 +7,18 @@
     >
       <label>E-mail</label>
       <input formControlName="email" />
+      @if (email.touched) {
+      <label *ngIf="email?.hasError('required')"> this field is required</label>
+      <label *ngIf="email?.hasError('email')"> please put a valid email</label>
+      }
       <label>Password</label>
+
       <input formControlName="password" />
+      @if (password.touched) {
+      <label *ngIf="password?.hasError('required')">
+        this field is required </label
+      >}
+
       <button>enviar</button>
     </form>
 

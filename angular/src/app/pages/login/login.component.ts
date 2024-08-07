@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PageLayoutComponent } from '../../encurtator/layout/page-layout/page-layout.component';
 import {
-  FormBuilder,
   FormControl,
   FormGroup,
   NonNullableFormBuilder,
@@ -11,24 +10,15 @@ import {
 } from '@angular/forms';
 import { Login } from '../../models/login';
 import { ApiService } from '../../service/api.service';
-
+import { NgIf } from '@angular/common';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [PageLayoutComponent, ReactiveFormsModule],
+  imports: [PageLayoutComponent, ReactiveFormsModule, NgIf],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent implements OnInit {
-  formLogin = new FormGroup({
-    email: new FormControl('', [
-      Validators.required,
-      Validators.email,
-      Validators.minLength(5),
-    ]),
-    password: new FormControl('', [Validators.required]),
-  });
-
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -38,6 +28,20 @@ export class LoginComponent implements OnInit {
   onRegister() {
     this.router.navigate(['pages/register']);
   }
+
+  formLogin = this.formBuilder.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required]],
+  });
+
+  get email() {
+    return this.formLogin.get('email') as FormControl;
+  }
+
+  get password() {
+    return this.formLogin.get('password') as FormControl;
+  }
+
   ngOnInit(): void {}
 
   onSubmitLogin() {
