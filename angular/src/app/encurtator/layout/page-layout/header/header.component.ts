@@ -17,4 +17,8 @@ export class HeaderComponent {
   onHome() {
     this.router.navigate(['']);
   }
+
+  onLogin() {
+    this.router.navigate(['pages']);
+  }
 }

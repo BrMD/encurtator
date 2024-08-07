@@ -1,15 +1,20 @@
 <app-page-layout>
   <main class="main">
-    <form [formGroup]="formLogin" class="formLogin">
+    <form
+      [formGroup]="formLogin"
+      (ngSubmit)="onSubmitLogin()"
+      class="formLogin"
+    >
       <label>E-mail</label>
-      <input />
+      <input formControlName="email" />
       <label>Password</label>
-      <input />
+      <input formControlName="password" />
+      <button>enviar</button>
     </form>
 
     <div class="message">
       <span>You don't have an account? </span>
-      <button (click)="onRegister()">Click here</button>
+      <button>Click here</button>
       <span> and create one!</span>
     </div>
   </main>

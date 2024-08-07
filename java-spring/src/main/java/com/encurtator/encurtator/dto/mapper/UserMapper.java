@@ -11,8 +11,7 @@ public class UserMapper {
 
     public UserDto toDto(User user){
         if(user == null) return null;
-        return new UserDto(user.getId(), user.getEmail(), HashUtils.toHexString(user.getPassword()), 
-        HashUtils.toHexString(user.getPublicKey()), HashUtils.toHexString(user.getPrivateKey()));
+        return new UserDto(user.getId(), user.getEmail(), HashUtils.toHexString(user.getPassword()));
     }
 
     public User toEntity(UserDto userDto) throws Exception{

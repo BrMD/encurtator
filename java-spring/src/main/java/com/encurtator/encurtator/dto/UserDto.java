@@ -11,9 +11,7 @@ import jakarta.validation.constraints.NotNull;
 public record UserDto(
     @JsonProperty("id") UUID id,
     @NotBlank @Email String email,
-    @NotNull @NotBlank String password,
-    String privateKey,
-    String publicKey
+    @NotNull @NotBlank String password
 ) {
     
 }

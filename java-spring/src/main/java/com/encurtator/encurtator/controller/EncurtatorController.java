@@ -54,13 +54,14 @@ public class EncurtatorController {
         encurtatorService.delete(id);
     }
 
-    @PostMapping("/keygen")
+    @PostMapping("/createUser")
     public UserDto createUser(@RequestBody UserDto userDto)throws Exception{
         return encurtatorService.createUser(userDto);
     }
 
-    @GetMapping("/login/user")
+    @PostMapping("/login/user")
         public UserDto login(@RequestBody UserDto userDto) throws Exception{
+            System.out.println(userDto.email());
             return encurtatorService.login(userDto);
         }
     
