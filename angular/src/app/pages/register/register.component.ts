@@ -55,7 +55,7 @@ export class RegisterComponent {
         email: this.formRegister.get('email')!.value!,
         password: this.formRegister.get('password')!.value!,
       };
-      this.service.login(loginData).subscribe({
+      this.service.createUser(loginData).subscribe({
         error: () => console.log('error'),
         complete: () => console.log('deu bom'),
       });
