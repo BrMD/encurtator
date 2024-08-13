@@ -10,6 +10,11 @@ import {
 import { Account } from '../../models/account';
 import { ApiService } from '../../service/api.service';
 import { NgIf } from '@angular/common';
+import {
+  HttpClient,
+  HttpContext,
+  HttpContextToken,
+} from '@angular/common/http';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -21,7 +26,9 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private formBuilder: NonNullableFormBuilder,
-    private service: ApiService
+    private service: ApiService,
+    private httpContext: HttpContext,
+    private httpClient: HttpClient
   ) {}
   onRegister() {
     this.router.navigate(['pages/register']);
@@ -48,7 +55,10 @@ export class LoginComponent {
       };
       this.service.login(loginData).subscribe({
         error: () => console.log('error'),
-        complete: () => console.log('deu bom'),
+        complete: () => {
+          const accountToken = new HttpContextToken<Account>(() => null);
+          this.httpContext.set<Account>(accountToken, loginData);
+        },
       });
     }
   }
