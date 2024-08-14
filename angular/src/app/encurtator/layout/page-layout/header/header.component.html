@@ -3,5 +3,7 @@
     <button (click)="onHome()">Encurtator</button>
     <button (click)="onShortenedList()">Shortened Links</button>
   </div>
-  <button class="navLogin" (click)="onLogin()">Login</button>
+  @if(loggedAccount){
+  <span>{{ loggedAccount.email }}</span>
+  }@else{<button class="navLogin" (click)="onLogin()">Login</button>}
 </nav>
