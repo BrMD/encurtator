@@ -52,7 +52,7 @@ export class LoginComponent {
       this.service.login(loginData).subscribe({
         error: () => console.log('error'),
         complete: () => {
-          this.authService.setAccount(loginData);
+          this.authService.setAccount(loginData.email);
           this.router.navigate(['/']);
         },
       });

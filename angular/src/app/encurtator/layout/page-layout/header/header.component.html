@@ -4,6 +4,9 @@
     <button (click)="onShortenedList()">Shortened Links</button>
   </div>
   @if(loggedAccount){
-  <span>{{ loggedAccount.email }}</span>
+  <div class="loggedDiv">
+    <span>{{ loggedAccount }}</span>
+    <button (click)="onLogout()">log out</button>
+  </div>
   }@else{<button class="navLogin" (click)="onLogin()">Login</button>}
 </nav>

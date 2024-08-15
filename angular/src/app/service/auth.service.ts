@@ -5,17 +5,19 @@ import { Account } from '../models/account';
   providedIn: 'root',
 })
 export class AuthService {
-  private account: Account | null = null;
+  private account: string | null = null;
 
-  setAccount(account: Account) {
-    this.account = account;
+  setAccount(email: string) {
+    this.account = email;
+    localStorage.setItem('user', email);
   }
 
-  getAccount(): Account | null {
+  getAccount(): string | null {
     return this.account;
   }
 
   clearAccount() {
     this.account = null;
+    localStorage.removeItem('user');
   }
 }

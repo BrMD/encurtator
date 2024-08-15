@@ -27,4 +27,9 @@ export class HeaderComponent {
   onLogin() {
     this.router.navigate(['pages']);
   }
+
+  onLogout() {
+    this.authService.clearAccount();
+    window.location.reload();
+  }
 }

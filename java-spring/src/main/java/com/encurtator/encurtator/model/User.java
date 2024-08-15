@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,6 +13,7 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+
 
 @Entity
 @Table(name = "users")
@@ -23,6 +25,7 @@ public class User {
 
     @NotBlank
     @Email
+    @Column(unique=true)
     private String email;
 
     @Lob
