@@ -11,6 +11,7 @@ import { ApiService } from '../../service/api.service';
 import { Account } from '../../models/account';
 import { confirmPasswordValidator } from './customValidatorConfirmPassword';
 import { NgIf } from '@angular/common';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -23,7 +24,8 @@ export class RegisterComponent {
   constructor(
     private router: Router,
     private formBuilder: NonNullableFormBuilder,
-    private service: ApiService
+    private service: ApiService,
+    private authService: AuthService
   ) {}
 
   onLogin() {
@@ -51,14 +53,21 @@ export class RegisterComponent {
   }
   onSubmitLogin() {
     if (this.formRegister.valid) {
-      const loginData: Account = {
+      const registerData: Account = {
         email: this.formRegister.get('email')!.value!,
         password: this.formRegister.get('password')!.value!,
       };
-      this.service.createUser(loginData).subscribe({
-        error: () => console.log('error'),
-        complete: () => console.log('deu bom'),
-      });
+      const confirmPassword = this.formRegister.get('confirmPassword')?.value;
+      if (confirmPassword && confirmPassword === registerData.password) {
+        this.service.createUser(registerData).subscribe({
+          error: () => console.log('error'),
+          complete: () => {
+            this.service.createUser(registerData);
+            this.authService.setAccount(registerData.email);
+            this.router.navigate(['/']);
+          },
+        });
+      }
     }
   }
 }
