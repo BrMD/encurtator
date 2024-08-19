@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.encurtator.encurtator.dto.EncurtatorDto;
 import com.encurtator.encurtator.dto.EncurtatorReqDto;
@@ -105,14 +104,6 @@ public class EncurtatorService {
         u.setPublicKey(keypair.getPublic().getEncoded());
         userRepository.save(u);
         return userMapper.toDto(u);
-    }
-
-    public UserDto login(@RequestBody UserDto userDto) throws Exception{
-        User user =  userRepository.findByEmail(userDto.email());
-        String p1 = HashUtils.toHexString(user.getPassword());
-        String p2 = HashUtils.toHexString(HashUtils.getSha(userDto.password()));
-        if(p1.equals(p2)) return userMapper.toDto(user);
-        return null;
     }
     
 }

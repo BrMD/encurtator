@@ -59,10 +59,10 @@ public class EncurtatorController {
         return encurtatorService.createUser(userDto);
     }
 
-    @PostMapping("/login/user")
-        public UserDto login(@RequestBody UserDto userDto) throws Exception{
-            System.out.println(userDto.email());
-            return encurtatorService.login(userDto);
-        }
+    // @PostMapping("/login/user")
+    //     public UserDto login(@RequestBody UserDto userDto) throws Exception{
+    //         System.out.println(userDto.email());
+    //         return encurtatorService.login(userDto);
+    //     }
     
 }
