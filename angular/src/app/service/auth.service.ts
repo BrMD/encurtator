@@ -10,7 +10,7 @@ export class AuthService {
 
   setAccount(email: string) {
     this.account = email;
-    localStorage.setItem('user', email);
+    localStorage.setItem('sessionId', email);
   }
 
   getAccount(): string | null {
@@ -19,6 +19,6 @@ export class AuthService {
 
   clearAccount() {
     this.account = null;
-    localStorage.removeItem('user');
+    localStorage.removeItem('sessionId');
   }
 }

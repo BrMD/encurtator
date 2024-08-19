@@ -1,5 +1,6 @@
 package com.encurtator.encurtator.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +22,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody UserDto user)throws Exception{
+    public ResponseEntity<?> login(@RequestBody UserDto user)throws Exception{
         return authService.login(user);
     }
 }

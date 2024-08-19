@@ -50,9 +50,9 @@ export class LoginComponent {
         password: this.formLogin.get('password')!.value!,
       };
       this.service.login(loginData).subscribe({
-        error: () => console.log('error'),
-        complete: () => {
-          this.authService.setAccount(loginData.email);
+        error: (err) => console.log(err),
+        next: (session) => {
+          this.authService.setAccount(session.sessionId);
           this.router.navigate(['/']);
         },
       });

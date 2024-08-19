@@ -1,5 +1,7 @@
 package com.encurtator.encurtator.service;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,18 +24,20 @@ public class AuthService {
         this.sessionRepository = sessionRepository;
     }
     
-    public String login(@RequestBody UserDto userDto) throws Exception{
-        //backend working but need to make work on the front and add errors status
-        User user =  userRepository.findByEmail(userDto.email());
-        if(user == null) return "error usuario nao encontrado";
-        String p1 = HashUtils.toHexString(user.getPassword());
-        String p2 = HashUtils.toHexString(HashUtils.getSha(userDto.password()));
-        if(p1.equals(p2)) {
-            Session session = new Session();
-            session.setUserId(user.getId());
-            sessionRepository.save(session);
-            return session.getSessionId().toString();
-        }
-        return "";
+    public ResponseEntity<?> login(@RequestBody UserDto userDto) throws Exception {
+    // Check if the user exists
+    User user = userRepository.findByEmail(userDto.email());
+    if (user == null) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\": \"User not found\"}");
     }
+    String p1 = HashUtils.toHexString(user.getPassword());
+    String p2 = HashUtils.toHexString(HashUtils.getSha(userDto.password()));
+    if (p1.equals(p2)) {
+        Session session = new Session();
+        session.setUserId(user.getId());
+        sessionRepository.save(session);
+        return ResponseEntity.ok("{\"sessionId\": \"" + session.getSessionId().toString() + "\"}");
+    }
+    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"error\": \"Invalid password\"}");
+}
 }

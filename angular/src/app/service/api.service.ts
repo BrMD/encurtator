@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Account } from '../models/account';
 import { Encurtator } from '../models/encurtator';
+import { session } from '../models/sessionId';
 
 @Injectable({
   providedIn: 'root',
@@ -9,15 +10,17 @@ import { Encurtator } from '../models/encurtator';
 export class ApiService {
   private readonly API = '/api';
   private readonly Redirect = '/redirect';
-
+  private readonly Auth = '/auth';
   constructor(private httpClient: HttpClient) {}
 
   login(User: Account) {
-    return this.httpClient.post<Account>(`${this.API}/login/user`, User);
+    return this.httpClient.post<session>(`${this.Auth}/login`, User);
   }
 
   createUser(User: Account) {
-    return this.httpClient.post<Account>(`${this.API}/createUser`, User);
+    const a = this.httpClient.post<Account>(`${this.API}/createUser`, User);
+    console.log(a);
+    return a;
   }
 
   getEncurtatorbyId(id: String) {
