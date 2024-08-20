@@ -15,9 +15,9 @@ export class AppComponent implements OnInit {
   title = 'encurtator';
   constructor(private authService: AuthService) {}
   veryfySession() {
-    const email = localStorage.getItem('sessionId');
-    if (email) {
-      this.authService.setAccount(email);
+    const sessionId = localStorage.getItem('sessionId');
+    if (sessionId) {
+      this.authService.setAccount(sessionId);
     }
   }
   ngOnInit(): void {

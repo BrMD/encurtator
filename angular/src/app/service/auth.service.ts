@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Account } from '../models/account';
+import { ApiService } from './api.service';
+import { infoUser } from '../models/infoUser';
 
 //have to change this to sessionId
 @Injectable({
@@ -7,18 +9,28 @@ import { Account } from '../models/account';
 })
 export class AuthService {
   private account: string | null = null;
+  private email: string | null = null;
+  constructor(private service: ApiService) {}
 
-  setAccount(email: string) {
-    this.account = email;
-    localStorage.setItem('sessionId', email);
+  setAccount(sessionId: string) {
+    this.account = sessionId;
+    localStorage.setItem('sessionId', sessionId);
+    this.service.getmail(sessionId).subscribe({
+      next: (user) => (this.email = user.email),
+      error: (error) => console.error(error),
+    });
+    console.log(this.email);
   }
 
   getAccount(): string | null {
-    return this.account;
+    return this.email;
   }
 
   clearAccount() {
-    this.account = null;
     localStorage.removeItem('sessionId');
+    if (this.account) {
+      this.service.logout(this.account);
+      this.account = null;
+    }
   }
 }

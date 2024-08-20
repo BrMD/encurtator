@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Account } from '../models/account';
 import { Encurtator } from '../models/encurtator';
 import { session } from '../models/sessionId';
+import { infoUser } from '../models/infoUser';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,14 @@ export class ApiService {
   private readonly Redirect = '/redirect';
   private readonly Auth = '/auth';
   constructor(private httpClient: HttpClient) {}
+
+  logout(sessionId: string) {
+    this.httpClient.delete(`${this.Auth}/logout/${sessionId}`);
+  }
+
+  getmail(sessionId: string) {
+    return this.httpClient.get<infoUser>(`${this.Auth}/getemail/${sessionId}`);
+  }
 
   login(User: Account) {
     return this.httpClient.post<session>(`${this.Auth}/login`, User);
