@@ -9,7 +9,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record EncurtatorReqDto(
-    @JsonProperty("userId") UUID userId,
+    @JsonProperty("sessionId") UUID sessionId,
     @NotNull @NotBlank @Column(length=100, nullable=false) String normalUrl) {
     
 }

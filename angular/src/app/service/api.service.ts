@@ -38,9 +38,9 @@ export class ApiService {
     );
   }
 
-  createEncurtator(id: String, normalUrl: String) {
+  createEncurtator(sessionId: String, normalUrl: String) {
     return this.httpClient.post<Encurtator>(`${this.API}/encurtator`, {
-      id,
+      session,
       normalUrl,
     });
   }

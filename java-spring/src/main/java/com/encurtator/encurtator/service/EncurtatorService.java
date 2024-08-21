@@ -16,8 +16,10 @@ import com.encurtator.encurtator.dto.UserDto;
 import com.encurtator.encurtator.dto.mapper.EncurtatorMapper;
 import com.encurtator.encurtator.dto.mapper.UserMapper;
 import com.encurtator.encurtator.model.Encurtator;
+import com.encurtator.encurtator.model.Session;
 import com.encurtator.encurtator.model.User;
 import com.encurtator.encurtator.repository.EncurtatorRepository;
+import com.encurtator.encurtator.repository.SessionRepository;
 import com.encurtator.encurtator.repository.UserRepository;
 import com.encurtator.encurtator.utils.HashUtils;
 
@@ -30,12 +32,14 @@ public class EncurtatorService {
     private final UserRepository userRepository;
     private final EncurtatorMapper encurtatorMapper;
     private final UserMapper userMapper;
+    private final SessionRepository sessionRepository;
     public EncurtatorService(EncurtatorRepository encurtatorRepository, UserRepository userRepository, 
-           EncurtatorMapper encurtatorMapper, UserMapper userMapper){
+           EncurtatorMapper encurtatorMapper, UserMapper userMapper, SessionRepository sessionRepository){
         this.encurtatorMapper = encurtatorMapper;
         this.encurtatorRepository = encurtatorRepository;
         this.userRepository = userRepository;
         this.userMapper = userMapper;
+        this.sessionRepository = sessionRepository;
 
     }
 
@@ -62,14 +66,16 @@ public class EncurtatorService {
             }
         }).orElseThrow(() -> new RuntimeException("Encurtator não encontrado para o id: " + id));
     }
-
+    
     public EncurtatorDto create(EncurtatorReqDto encurtatorReqDto) throws Exception{
+        // #TODO have to add more errors and status stuff
         Encurtator enc = new Encurtator();
-        User user = userRepository.findById(encurtatorReqDto.userId()).orElseThrow();
+        Session sessionFinder = sessionRepository.findById(encurtatorReqDto.sessionId()).orElseThrow();
+        User user = userRepository.findById(sessionFinder.getUserId()).orElseThrow();
         enc.setEncryptedUrl(HashUtils.encryptUrl(encurtatorReqDto.normalUrl(), HashUtils.decodePublicKey(user.getPublicKey())));
         enc.setShortUrl(convertUrl(enc.getEncryptedUrl()));
         enc.setCreatedAt(new Date());
-        enc.setUserId(encurtatorReqDto.userId());
+        enc.setUserId(sessionFinder.getUserId());
         encurtatorRepository.save(enc);
         return encurtatorMapper.toDto(enc);
         
