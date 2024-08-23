@@ -35,6 +35,8 @@ public class ApplicationControllerAdvice {
                 .reduce("", (acc, error) -> acc + error + "\n");
     }
 
+   
+
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException ex) {
@@ -46,4 +48,5 @@ public class ApplicationControllerAdvice {
         }
         return "Argument type not valid";
     }
-}
+
+   }

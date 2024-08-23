@@ -1,4 +1,19 @@
-<div>
-  <input />
-  <button>enviar</button>
-</div>
+<form
+  [formGroup]="formInputLink"
+  (ngSubmit)="onSubmitUrlForm()"
+  class="formInputUrl"
+>
+  <input formControlName="inputLink" />
+  @if (inputLink.touched) {
+  <label *ngIf="formInputLink.errors?.['UrlNotValid']">
+    Please input a valid URL
+  </label>
+  <label *ngIf="inputLink?.hasError('required')">
+    This field is required
+  </label>
+  }
+  <button type="submit">enviar</button>
+</form>
+@if(shortened!==null){
+<span>{{ shortened }}</span>
+}

@@ -19,7 +19,7 @@ export class HeaderComponent {
   onShortenedList() {
     this.router.navigate(['shortenedList'], { relativeTo: this.route });
   }
-  loggedAccount = this.authService.getAccount();
+  loggedAccount = this.authService.getEmail();
   onHome() {
     this.router.navigate(['']);
   }

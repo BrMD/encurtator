@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Account } from '../models/account';
-import { Encurtator } from '../models/encurtator';
+import {
+  Encurtator,
+  EncurtatorPost,
+  EncurtatorResult,
+} from '../models/encurtator';
 import { session } from '../models/sessionId';
 import { infoUser } from '../models/infoUser';
 
@@ -28,7 +32,6 @@ export class ApiService {
 
   createUser(User: Account) {
     const a = this.httpClient.post<Account>(`${this.API}/createUser`, User);
-    console.log(a);
     return a;
   }
 
@@ -38,11 +41,11 @@ export class ApiService {
     );
   }
 
-  createEncurtator(sessionId: String, normalUrl: String) {
-    return this.httpClient.post<Encurtator>(`${this.API}/encurtator`, {
-      session,
-      normalUrl,
-    });
+  createEncurtator(encuratorReq: EncurtatorPost) {
+    return this.httpClient.post<EncurtatorResult>(
+      `${this.API}/encurtator`,
+      encuratorReq
+    );
   }
 
   deleteEncurtator(id: String) {

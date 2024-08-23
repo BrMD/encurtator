@@ -22,8 +22,12 @@ export class AuthService {
     console.log(this.email);
   }
 
-  getAccount(): string | null {
+  getEmail(): string | null {
     return this.email;
+  }
+
+  getAccount(): string | null {
+    return this.account;
   }
 
   clearAccount() {

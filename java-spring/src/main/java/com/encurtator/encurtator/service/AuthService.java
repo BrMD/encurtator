@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.encurtator.encurtator.dto.UserDto;
+import com.encurtator.encurtator.exception.RecordNotFoundException;
 import com.encurtator.encurtator.model.Session;
 import com.encurtator.encurtator.model.User;
 import com.encurtator.encurtator.repository.SessionRepository;
@@ -40,12 +41,12 @@ public class AuthService {
             sessionRepository.save(session);
             return ResponseEntity.ok("{\"sessionId\": \"" + session.getSessionId().toString() + "\"}");
         }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"error\": \"Invalid password\"}");
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"error\": \"Unauthorized User\"}");
     }
 
     public ResponseEntity<?> getEmail(@RequestParam UUID sessionId) throws Exception{
-        Session session = sessionRepository.findById(sessionId).orElseThrow(() -> new RuntimeException("Session with the id: " + sessionId + "not found"));
-        User userSelected = userRepository.findById(session.getUserId()).orElseThrow(() -> new RuntimeException("User with the id: " + session.getUserId() + "not found"));
+        Session session = sessionRepository.findById(sessionId).orElseThrow(() -> new RecordNotFoundException(sessionId));
+        User userSelected = userRepository.findById(session.getUserId()).orElseThrow(() -> new RecordNotFoundException(session.getUserId()));
         return ResponseEntity.ok("{\"email\": \"" + userSelected.getEmail() + "\"}");    
     }
 

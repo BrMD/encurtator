@@ -15,6 +15,7 @@ import com.encurtator.encurtator.dto.EncurtatorReqDto;
 import com.encurtator.encurtator.dto.UserDto;
 import com.encurtator.encurtator.dto.mapper.EncurtatorMapper;
 import com.encurtator.encurtator.dto.mapper.UserMapper;
+import com.encurtator.encurtator.exception.RecordNotFoundException;
 import com.encurtator.encurtator.model.Encurtator;
 import com.encurtator.encurtator.model.Session;
 import com.encurtator.encurtator.model.User;
@@ -50,7 +51,7 @@ public class EncurtatorService {
                 return encurtatorMapper.toDto(encurtator);
             } catch (Exception e) {
                 e.printStackTrace();
-                return null; // ou você pode lançar uma RuntimeException, por exemplo
+                return null; 
             }
         })
         .collect(Collectors.toList());
@@ -64,15 +65,14 @@ public class EncurtatorService {
                 e.printStackTrace();
                 return null;
             }
-        }).orElseThrow(() -> new RuntimeException("Encurtator não encontrado para o id: " + id));
+        }).orElseThrow(() -> new RecordNotFoundException(id));
     }
     
     public EncurtatorDto create(EncurtatorReqDto encurtatorReqDto) throws Exception{
-        // #TODO have to add more errors and status stuff
         Encurtator enc = new Encurtator();
-        Session sessionFinder = sessionRepository.findById(encurtatorReqDto.sessionId()).orElseThrow();
-        User user = userRepository.findById(sessionFinder.getUserId()).orElseThrow();
-        enc.setEncryptedUrl(HashUtils.encryptUrl(encurtatorReqDto.normalUrl(), HashUtils.decodePublicKey(user.getPublicKey())));
+        Session sessionFinder = sessionRepository.findById(encurtatorReqDto.sessionId()).orElseThrow(() -> new RecordNotFoundException(encurtatorReqDto.sessionId()));
+        User user = userRepository.findById(sessionFinder.getUserId()).orElseThrow(() -> new RecordNotFoundException(sessionFinder.getUserId()));
+        enc.setEncryptedUrl(HashUtils.encryptUrl(encurtatorReqDto.longUrl(), HashUtils.decodePublicKey(user.getPublicKey())));
         enc.setShortUrl(convertUrl(enc.getEncryptedUrl()));
         enc.setCreatedAt(new Date());
         enc.setUserId(sessionFinder.getUserId());
