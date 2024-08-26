@@ -35,9 +35,10 @@ export class ApiService {
     return a;
   }
 
-  getEncurtatorbyId(id: String) {
+  getEncurtatorsbyId(id: string) {
+    console.log(id);
     return this.httpClient.get<Array<Encurtator>>(
-      `${this.API}/encurtator/${id}`
+      `${this.API}/encurtator/all/${id}`
     );
   }
 

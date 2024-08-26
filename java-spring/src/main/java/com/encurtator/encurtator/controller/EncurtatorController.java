@@ -32,9 +32,9 @@ public class EncurtatorController {
         this.encurtatorService = encurtatorService;
     }
 
-    @GetMapping("/encurtator")
-    public List<EncurtatorDto> list(){
-        return encurtatorService.list();
+    @GetMapping("/encurtator/all/{sessionId}")
+    public List<EncurtatorDto> list(@PathVariable UUID sessionId){
+        return encurtatorService.list(sessionId);
     }
 
     @GetMapping("/encurtator/{id}")

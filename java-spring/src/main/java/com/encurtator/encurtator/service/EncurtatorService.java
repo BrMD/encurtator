@@ -44,17 +44,25 @@ public class EncurtatorService {
 
     }
 
-    public List<EncurtatorDto> list(){
-        return encurtatorRepository.findAll().stream()
-        .map(encurtator -> {
+    public List<EncurtatorDto> list(UUID id){
+        Session session = sessionRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(id));
+        List<EncurtatorDto> teste = encurtatorRepository.findByUserId(session.getUserId()).stream().map(encurtator -> {
             try {
                 return encurtatorMapper.toDto(encurtator);
             } catch (Exception e) {
                 e.printStackTrace();
                 return null; 
             }
-        })
-        .collect(Collectors.toList());
+        }).collect(Collectors.toList());
+        System.out.println(teste);
+        return encurtatorRepository.findByUserId(session.getUserId()).stream().map(encurtator -> {
+            try {
+                return encurtatorMapper.toDto(encurtator);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null; 
+            }
+        }).collect(Collectors.toList());
     }
 
     public EncurtatorDto findByID(UUID id){
