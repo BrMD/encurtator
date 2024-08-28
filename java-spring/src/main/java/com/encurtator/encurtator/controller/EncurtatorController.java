@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,8 +52,9 @@ public class EncurtatorController {
 
     @DeleteMapping("/encurtator/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable @NotNull UUID id){
-        encurtatorService.delete(id);
+    public ResponseEntity<?> delete(@PathVariable @NotNull UUID id){
+        System.out.println("aqui no spring");
+        return encurtatorService.delete(id);
     }
 
     @PostMapping("/createUser")

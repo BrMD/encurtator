@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.encurtator.encurtator.model.Encurtator;
 
 public interface EncurtatorRepository extends JpaRepository<Encurtator, UUID> {
-    Encurtator findByShortUrl(String shortUrl);
+    Encurtator findByshortUrl(String shortUrl);
     List<Encurtator> findByUserId(UUID userId);
 }

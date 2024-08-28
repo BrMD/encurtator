@@ -1,11 +1,11 @@
 <app-page-layout>
   <div class="shortenedMain">
     <span class="title">List of Links</span>
-    <ul class="encurtatorList">
+    <ul class="encurtatorList" *ngFor="let encurtator of encurtators">
       <li class="encurtator">
-        <span class="linkShort">encurtator.com/1J53V8</span>
-        <span class="longLink">https://google.com.br</span>
-        <button>delete</button>
+        <span class="linkShort">encurtator.com/{{ encurtator.shortUrl }}</span>
+        <span class="longLink">{{ encurtator.encryptedUrl }}</span>
+        <button (click)="onDelete(encurtator.id)">delete</button>
       </li>
     </ul>
   </div>

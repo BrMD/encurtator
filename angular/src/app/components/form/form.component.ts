@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { confirmUrlValidator } from './customValidatorUrl';
-import { NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { ApiService } from '../../service/api.service';
 import { AuthService } from '../../service/auth.service';
 import { EncurtatorPost } from '../../models/encurtator';
@@ -14,7 +14,7 @@ import { EncurtatorPost } from '../../models/encurtator';
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [NgIf, ReactiveFormsModule],
+  imports: [NgIf, ReactiveFormsModule, NgFor],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css',
 })
@@ -46,7 +46,7 @@ export class FormComponent {
         longUrl: inputLinkaux,
       };
       this.apiService.createEncurtator(encurtatorReq).subscribe({
-        next: (encurted) => (this.shortened = encurted.ShortUrl),
+        next: (encurted) => (this.shortened = encurted.shortUrl),
         error: (error) => console.error(error),
       });
     }

@@ -12,7 +12,7 @@ import jakarta.validation.constraints.NotNull;
 
 public record EncurtatorDto(
     @Id @JsonProperty("id") UUID id,
-    @NotNull @NotBlank @Column(length=15, nullable = false) String ShortUrl,
+    @NotNull @NotBlank @Column(length=15, nullable = false) String shortUrl,
     @NotNull @NotBlank @Column(length=100, nullable=false) String encryptedUrl,
     @JsonProperty("userId") UUID userId,
     @NotNull Date createAt) {

@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -105,8 +107,14 @@ public class EncurtatorService {
         return pair;
     }
 
-    public void delete(@NotNull UUID id){
-        encurtatorRepository.deleteById(id);
+    public ResponseEntity<?> delete(@NotNull UUID id){
+        try{
+            encurtatorRepository.deleteById(id);
+            return ResponseEntity.ok("{\"Encurtator Deleted Successfully\"}"); 
+        }catch(Exception err){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\": \"Encurtator not found\"}");
+        }
+        
     }
     
     public UserDto createUser(UserDto userDto) throws Exception{

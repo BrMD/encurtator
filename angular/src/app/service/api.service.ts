@@ -1,11 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Account } from '../models/account';
-import {
-  Encurtator,
-  EncurtatorPost,
-  EncurtatorResult,
-} from '../models/encurtator';
+import { EncurtatorPost, EncurtatorResult } from '../models/encurtator';
 import { session } from '../models/sessionId';
 import { infoUser } from '../models/infoUser';
 
@@ -37,7 +33,7 @@ export class ApiService {
 
   getEncurtatorsbyId(id: string) {
     console.log(id);
-    return this.httpClient.get<Array<Encurtator>>(
+    return this.httpClient.get<Array<EncurtatorResult>>(
       `${this.API}/encurtator/all/${id}`
     );
   }
@@ -50,7 +46,7 @@ export class ApiService {
   }
 
   deleteEncurtator(id: String) {
-    return this.httpClient.delete(`${this.API}/encuratator/${id}`);
+    return this.httpClient.delete(`${this.API}/encurtator/${id}`);
   }
 
   redirect(shortUrl: String) {

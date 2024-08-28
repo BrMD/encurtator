@@ -14,8 +14,8 @@ public class RedirectService {
         this.encurtatorRepository = encurtatorRepository;
     }
 
-    public String findByShortUrl(String shortUrl){
-        Encurtator result = encurtatorRepository.findByShortUrl(shortUrl);
+    public String findByshortUrl(String shortUrl){
+        Encurtator result = encurtatorRepository.findByshortUrl(shortUrl);
         return result.getEncryptedUrl();
     }
 }

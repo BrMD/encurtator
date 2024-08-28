@@ -21,7 +21,7 @@ public class RedirectController {
     
     @GetMapping("/{shortUrl}")
     public String redirect(@PathVariable String shortUrl){
-        return redirectService.findByShortUrl(shortUrl);
+        return redirectService.findByshortUrl(shortUrl);
     }
 
 }

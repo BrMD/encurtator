@@ -42,7 +42,7 @@ public class Encurtator {
         this.id = id;
     }
 
-    public String getShortUrl() {
+    public String getshortUrl() {
         return shortUrl;
     }
 

@@ -23,7 +23,7 @@ public class EncurtatorMapper {
     public EncurtatorDto toDto(Encurtator encurtator) throws NoSuchAlgorithmException, InvalidKeySpecException, Exception{
         if(encurtator == null) return null;
         User user = userRepository.findById(encurtator.getUserId()).orElseThrow();
-        return new EncurtatorDto(encurtator.getId(), encurtator.getShortUrl(), 
+        return new EncurtatorDto(encurtator.getId(), encurtator.getshortUrl(), 
         HashUtils.decryptUrl(encurtator.getEncryptedUrl(), HashUtils.decodePrivateKey(user.getPrivateKey())), 
         encurtator.getUserId(), encurtator.getCreatedAt());
     }
@@ -32,7 +32,7 @@ public class EncurtatorMapper {
         if(encurtatorDto == null) return null;
         Encurtator encurtator = new Encurtator();
         if(encurtatorDto.id() != null) encurtator.setId(encurtatorDto.id());
-        encurtator.setShortUrl(encurtatorDto.ShortUrl());
+        encurtator.setShortUrl(encurtatorDto.shortUrl());
         encurtator.setEncryptedUrl(encurtatorDto.encryptedUrl());
         encurtator.setCreatedAt(encurtatorDto.createAt());
         encurtator.setUserId(encurtatorDto.userId());
