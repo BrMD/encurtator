@@ -1,5 +1,6 @@
 package com.encurtator.encurtator.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,14 +14,11 @@ import com.encurtator.encurtator.service.RedirectService;
 @RequestMapping("/redirect")
 public class RedirectController {
     private final RedirectService redirectService;
-
     public RedirectController(RedirectService redirectService){
         this.redirectService = redirectService;
     }
-
-    
     @GetMapping("/{shortUrl}")
-    public String redirect(@PathVariable String shortUrl){
+    public ResponseEntity<?> redirect(@PathVariable String shortUrl) throws Exception{
         return redirectService.findByshortUrl(shortUrl);
     }
 

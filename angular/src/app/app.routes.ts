@@ -12,4 +12,9 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./pages/pages.module').then((m) => m.PagesModule),
   },
+  {
+    path: 'r',
+    loadChildren: () =>
+      import('../redirect/redirect.module').then((m) => m.RedirectModule),
+  },
 ];

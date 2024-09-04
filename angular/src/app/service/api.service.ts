@@ -4,6 +4,7 @@ import { Account } from '../models/account';
 import { EncurtatorPost, EncurtatorResult } from '../models/encurtator';
 import { session } from '../models/sessionId';
 import { infoUser } from '../models/infoUser';
+import { Url } from '../models/url';
 
 @Injectable({
   providedIn: 'root',
@@ -50,6 +51,6 @@ export class ApiService {
   }
 
   redirect(shortUrl: String) {
-    return this.httpClient.get<String>(`${this.Redirect}/${shortUrl}`);
+    return this.httpClient.get<Url>(`${this.Redirect}/${shortUrl}`);
   }
 }
