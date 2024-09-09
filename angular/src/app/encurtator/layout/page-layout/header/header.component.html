@@ -8,5 +8,7 @@
     <span>{{ loggedAccount }}</span>
     <button (click)="onLogout()">log out</button>
   </div>
-  }@else{<button class="navLogin" (click)="onLogin()">Login</button>}
+  }@else{
+  <div class="navLogin"><button (click)="onLogin()">Login</button></div>
+  }
 </nav>

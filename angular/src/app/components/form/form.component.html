@@ -5,10 +5,10 @@
 >
   <input formControlName="inputLink" />
   @if (inputLink.touched) {
-  <label *ngIf="formInputLink.errors?.['UrlNotValid']">
+  <label *ngIf="formInputLink.errors?.['UrlNotValid']" class="inputError">
     Please input a valid URL
   </label>
-  <label *ngIf="inputLink?.hasError('required')">
+  <label *ngIf="inputLink?.hasError('required')" class="inputError">
     This field is required
   </label>
   }

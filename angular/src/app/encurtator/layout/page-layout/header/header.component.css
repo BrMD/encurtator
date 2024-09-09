@@ -12,16 +12,19 @@
 }
 
 .navButtons button {
-  margin: 0 0.5em;
+  margin: 0.8em 0.5em;
   border: none;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 17px;
   color: #fff;
   width: 10em;
   padding: 0.4em;
   background-color: #02afbb;
   border-radius: 8px;
   transition: all 0.8s ease-out;
+  font-family: "PT Sans", sans-serif;
+  font-weight: 600;
+  font-style: normal;
 }
 .navButtons button:hover {
   background-color: #017a83;
@@ -34,6 +37,36 @@
 }
 
 .loggedDiv {
-  display: flex;
+  position: absolute;
+  right: 1%;
   flex-direction: column;
+}
+
+.loggedDiv span {
+  display: block;
+  margin-bottom: 0.2em;
+  font-family: "Quicksand", sans-serif;
+}
+
+.loggedDiv button,
+.navLogin button {
+  cursor: pointer;
+  background-color: #02afbb;
+  border: none;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 1em;
+  transition: all 0.8s ease-out;
+  font-family: "Quicksand", sans-serif;
+}
+
+.loggedDiv button:hover,
+.navLogin button:hover {
+  background-color: #017a83;
+}
+
+.loggedDiv button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }

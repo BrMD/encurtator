@@ -3,4 +3,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #fff;
+  font-family: "Reddit Sans Condensed", sans-serif;
 }

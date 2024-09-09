@@ -3,8 +3,12 @@
   padding: 0;
   border-top: 2px solid #02afbb;
   border-bottom: 2px solid #02afbb;
-  background-color: #303030;
-
+  background: rgb(55, 192, 201);
+  background: radial-gradient(
+    circle,
+    rgba(55, 192, 201, 1) 0%,
+    rgba(255, 255, 255, 1) 50%
+  );
   min-height: 90vh;
   display: flex;
   justify-content: center;
