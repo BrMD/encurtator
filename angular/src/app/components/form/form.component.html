@@ -4,15 +4,17 @@
   class="formInputUrl"
 >
   <input formControlName="inputLink" />
-  @if (inputLink.touched) {
-  <label *ngIf="formInputLink.errors?.['UrlNotValid']" class="inputError">
-    Please input a valid URL
-  </label>
-  <label *ngIf="inputLink?.hasError('required')" class="inputError">
-    This field is required
-  </label>
-  }
-  <button type="submit">enviar</button>
+  <div class="divErrors">
+    @if (inputLink.touched) {
+    <label *ngIf="formInputLink.errors?.['UrlNotValid']" class="inputError">
+      Please input a valid URL
+    </label>
+    <label *ngIf="inputLink?.hasError('required')" class="inputError">
+      This field is required
+    </label>
+    }
+  </div>
+  <button type="submit">Submit</button>
 </form>
 @if(shortened!==null){
 <span>{{ shortened }}</span>
