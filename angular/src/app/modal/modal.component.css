@@ -1,0 +1,32 @@
+.overlay {
+  min-width: 100%;
+  min-height: 102%;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.281);
+  left: 0;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background-color: #f2f2f2;
+  width: 20vw;
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.text span {
+  display: block;
+  margin-left: 1em;
+}
+
+.text p {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

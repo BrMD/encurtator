@@ -10,8 +10,8 @@ export type EncurtatorPost = {
 
 export type EncurtatorResult = {
   id: String;
-  shortUrl: String;
-  encryptedUrl: String;
+  shortUrl: string;
+  encryptedUrl: string;
   userId: String;
   createAt: Date;
 };

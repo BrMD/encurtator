@@ -2,10 +2,11 @@
   <div class="shortenedMain">
     <span class="title">List of Links</span>
     <ul class="encurtatorList" *ngFor="let encurtator of encurtators">
-      <li class="encurtator">
+      <li class="encurtator" (click)="onClickCopy(encurtator.shortUrl)">
         <span class="linkShort">encurtator.com/{{ encurtator.shortUrl }}</span>
         <span class="longLink">{{ encurtator.encryptedUrl }}</span>
-        <button (click)="onDelete(encurtator.id)">delete</button>
+        <button (click)="onModal()">delete</button>
+        <app-modal [item]="encurtator.encryptedUrl"></app-modal>
       </li>
     </ul>
   </div>
