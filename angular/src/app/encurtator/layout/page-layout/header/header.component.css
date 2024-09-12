@@ -4,6 +4,7 @@
   justify-content: space-between;
   align-items: center;
   background-color: #1c1c1c;
+  width: 100%;
 }
 
 .navButtons {
@@ -46,6 +47,7 @@
 .loggedDiv span {
   display: block;
   margin-bottom: 0.2em;
+  color: #f2f2f2;
   font-family: "Quicksand", sans-serif;
 }
 

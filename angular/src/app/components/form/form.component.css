@@ -60,3 +60,16 @@
 .formInputUrl button:hover {
   background-color: #017a83;
 }
+
+.resultShort {
+  background-color: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5em;
+  padding: 0.5em;
+  border: 4px solid #555d50;
+  border-radius: 5px;
+  font-family: "PT Sans", system-ui;
+  font-weight: 700;
+  font-style: normal;
+}
