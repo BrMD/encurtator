@@ -15,6 +15,6 @@ export const routes: Routes = [
   {
     path: 'r',
     loadChildren: () =>
-      import('../redirect/redirect.module').then((m) => m.RedirectModule),
+      import('../app/redirect/redirect.module').then((m) => m.RedirectModule),
   },
 ];

@@ -53,7 +53,6 @@ public class EncurtatorController {
     @DeleteMapping("/encurtator/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public ResponseEntity<?> delete(@PathVariable @NotNull UUID id){
-        System.out.println("aqui no spring");
         return encurtatorService.delete(id);
     }
 

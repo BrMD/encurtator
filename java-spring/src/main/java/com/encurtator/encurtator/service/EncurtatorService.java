@@ -110,7 +110,7 @@ public class EncurtatorService {
     public ResponseEntity<?> delete(@NotNull UUID id){
         try{
             encurtatorRepository.deleteById(id);
-            return ResponseEntity.ok("{\"Encurtator Deleted Successfully\"}"); 
+            return ResponseEntity.ok("{\"success\":\"Encurtator Deleted Successfully\"}"); 
         }catch(Exception err){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\": \"Encurtator not found\"}");
         }

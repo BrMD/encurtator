@@ -1,13 +1,20 @@
 <app-page-layout>
+  <app-popup></app-popup>
+
   <div class="shortenedMain">
     <span class="title">List of Links</span>
     <ul class="encurtatorList" *ngFor="let encurtator of encurtators">
       <li class="encurtator" (click)="onClickCopy(encurtator.shortUrl)">
         <span class="linkShort">encurtator.com/{{ encurtator.shortUrl }}</span>
         <span class="longLink">{{ encurtator.encryptedUrl }}</span>
-        <button (click)="onModal()">delete</button>
-        <app-modal [item]="encurtator.encryptedUrl"></app-modal>
+        <button (click)="onModal(encurtator)">delete</button>
       </li>
     </ul>
   </div>
+  @if(modal!==null){
+  <app-modal
+    [item]="modal"
+    (confirmation)="onConfirmationDelete($event)"
+  ></app-modal>
+  }
 </app-page-layout>

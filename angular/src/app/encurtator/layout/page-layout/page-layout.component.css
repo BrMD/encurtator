@@ -1,3 +1,4 @@
 .wrapper:last-child {
   min-height: 80vh;
+  overflow-x: hidden;
 }
