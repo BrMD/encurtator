@@ -1,11 +1,8 @@
-FROM maven:3-eclipse-temurin-21 AS build
- 
-WORKDIR /app
- 
-COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
-RUN ./mvnw dependency:go-offline
- 
-COPY src ./src
- 
-CMD ["./mvnw", "spring-boot:run"]
+FROM maven:3.8.5-eclipse-temurin:21 AS build
+COPY . .
+RUN mvn clean package -DskipTests
+
+FROM eclipse-temurin:21
+COPY --from=build /target/encurtator-0.0.1-SNAPSHOT.jar encurtator.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "demo.jar"]
