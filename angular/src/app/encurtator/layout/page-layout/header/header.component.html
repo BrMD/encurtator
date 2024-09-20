@@ -3,12 +3,17 @@
     <button (click)="onHome()">Encurtator</button>
     <button (click)="onShortenedList()">Shortened Links</button>
   </div>
-  @if(loggedAccount){
-  <div class="loggedDiv">
-    <span>{{ loggedAccount }}</span>
-    <button (click)="onLogout()">log out</button>
-  </div>
-  }@else{
+  @if(loggedAccount===null){
   <div class="navLogin"><button (click)="onLogin()">Login</button></div>
+  } @if(loggedAccount){
+  <div class="loggedDiv">
+    <div *ngIf="loggedEmail$ | async as infoUser; else loading">
+      <span>{{ infoUser.email }}</span>
+      <button (click)="onLogout()">log out</button>
+    </div>
+    <ng-template #loading>
+      <app-spinner></app-spinner>
+    </ng-template>
+  </div>
   }
 </nav>

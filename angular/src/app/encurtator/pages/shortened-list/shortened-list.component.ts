@@ -4,8 +4,8 @@ import { ApiService } from '../../../service/api.service';
 import { AuthService } from '../../../service/auth.service';
 import { EncurtatorResult } from '../../../models/encurtator';
 import { NgForOf } from '@angular/common';
-import { ModalComponent } from '../../../modal/modal.component';
-import { PopupComponent } from '../../../popup/popup.component';
+import { ModalComponent } from '../../../components/modal/modal.component';
+import { PopupComponent } from '../../../components/popup/popup.component';
 
 @Component({
   selector: 'app-shortened-list',

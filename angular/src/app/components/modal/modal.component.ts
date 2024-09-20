@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { EncurtatorResult } from '../models/encurtator';
+import { EncurtatorResult } from '../../models/encurtator';
 
 @Component({
   selector: 'app-modal',

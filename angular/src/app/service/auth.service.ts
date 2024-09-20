@@ -15,11 +15,13 @@ export class AuthService {
   setAccount(sessionId: string) {
     this.account = sessionId;
     localStorage.setItem('sessionId', sessionId);
-    this.service.getmail(sessionId).subscribe({
+    this.getEmailObservable(sessionId).subscribe({
       next: (user) => (this.email = user.email),
       error: (error) => console.error(error),
     });
-    console.log(this.email);
+  }
+  getEmailObservable(sessionId: string) {
+    return this.service.getmail(sessionId);
   }
 
   getEmail(): string | null {

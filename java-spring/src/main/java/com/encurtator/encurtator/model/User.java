@@ -11,11 +11,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
+import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 
 @Entity
+@Transactional
 @Table(name = "users")
 public class User {
     @Id
@@ -28,6 +30,7 @@ public class User {
     @Column(unique=true)
     private String email;
 
+    
     @Lob
     private byte[] password;
 

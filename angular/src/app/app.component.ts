@@ -14,13 +14,13 @@ import { AuthService } from './service/auth.service';
 export class AppComponent implements OnInit {
   title = 'encurtator';
   constructor(private authService: AuthService) {}
-  veryfySession() {
+  verifySession() {
     const sessionId = localStorage.getItem('sessionId');
     if (sessionId) {
       this.authService.setAccount(sessionId);
     }
   }
   ngOnInit(): void {
-    this.veryfySession();
+    this.verifySession();
   }
 }
