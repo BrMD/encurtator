@@ -10,18 +10,13 @@
   flex-direction: column;
 }
 
-.formLogin {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-}
-
-.formLogin label {
-  margin: 0.5em 0 0.5em 0;
-}
-
 .message {
   margin: 2em 0 0 0;
+  font-family: "Quicksand", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  color: #f2f2f2;
 }
 
 .message button {
@@ -29,4 +24,73 @@
   cursor: pointer;
   background-color: inherit;
   color: #019aa5;
+}
+
+.formLogin {
+  flex-direction: column;
+}
+
+.formLogin input {
+  display: block;
+  margin: 0.5em 0 0.5em 0;
+  width: 15em;
+  height: 2em;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  border: #f5f5f5 solid 3px;
+  font-family: "PT Sans", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.formLogin input:focus {
+  outline: none;
+  border-color: #017a83;
+}
+
+.formLogin label {
+  margin: 0.5em 0 0.5em 0;
+  font-family: "PT Sans", system-ui;
+  font-weight: 500;
+  font-style: normal;
+  text-align: center;
+  display: block;
+  color: #f2f2f2;
+}
+
+.formLogin button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0.5em;
+}
+
+.divErrors {
+  display: flex;
+  flex-direction: column;
+}
+
+.divErrors label {
+  color: #c90505;
+  font-family: "Quicksand", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.formLogin button {
+  cursor: pointer;
+  background-color: #02afbb;
+  border: none;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 1.2em;
+  transition: all 0.8s ease-out;
+  font-family: "PT Sans", system-ui;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.formLogin button:hover {
+  background-color: #017a83;
 }

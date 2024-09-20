@@ -8,26 +8,37 @@
       <label>E-mail</label>
       <input formControlName="email" />
       @if (email.touched) {
-      <label *ngIf="email?.hasError('required')"> this field is required</label>
-      <label *ngIf="email?.hasError('email')"> please put a valid email</label>
+      <div class="divErrors">
+        <label *ngIf="email?.hasError('required')">
+          this field is required</label
+        >
+        <label *ngIf="email?.hasError('email')">
+          please put a valid email</label
+        >
+      </div>
       }
       <label>Password</label>
       <input formControlName="password" />
       @if (password.touched) {
-      <label *ngIf="password?.hasError('required')">
-        this field is required </label
-      >}
-      <label> Confirm Password</label>
-      <input formControlName="confirmPassword" />
-      @if (confirmPassword.touched) {
-      <label *ngIf="confirmPassword?.hasError('required')">
-        this field is required
-      </label>
-      <label *ngIf="formRegister.errors?.['PasswordNoMatch']">
-        Password does'nt match.
-      </label>
+      <div class="divErrors">
+        <label *ngIf="password?.hasError('required')">
+          this field is required
+        </label>
+      </div>
       }
-      <button type="submit">enviar</button>
+      <label> Confirm Password</label>
+      <div class="divErrors">
+        <input formControlName="confirmPassword" />
+        @if (confirmPassword.touched) {
+        <label *ngIf="confirmPassword?.hasError('required')">
+          this field is required
+        </label>
+        <label *ngIf="formRegister.errors?.['PasswordNoMatch']">
+          Password does'nt match.
+        </label>
+        }
+      </div>
+      <button type="submit">Submit</button>
     </form>
     <div class="message">
       <span>Already have an account? </span>

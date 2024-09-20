@@ -7,19 +7,28 @@
     >
       <label>E-mail</label>
       <input formControlName="email" />
-      @if (email.touched) {
-      <label *ngIf="email?.hasError('required')"> this field is required</label>
-      <label *ngIf="email?.hasError('email')"> please put a valid email</label>
-      }
+      <div class="divErrors">
+        @if (email.touched) {
+        <label class="errorMessage" *ngIf="email?.hasError('required')">
+          this field is required</label
+        >
+        <label class="errorMessage" *ngIf="email?.hasError('email')">
+          please put a valid email</label
+        >
+        }
+      </div>
       <label>Password</label>
 
-      <input formControlName="password" />
+      <input formControlName="password" type="password" />
       @if (password.touched) {
-      <label *ngIf="password?.hasError('required')">
-        this field is required </label
-      >}
+      <div class="divErrors">
+        <label *ngIf="password?.hasError('required')">
+          this field is required
+        </label>
+      </div>
+      }
 
-      <button>enviar</button>
+      <button>Submit</button>
     </form>
 
     <div class="message">
