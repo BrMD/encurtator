@@ -100,24 +100,6 @@
   background-color: #017a83;
 }
 
-/* 
-.formRegister {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
+.spinnerContainer {
+  margin-top: 1em;
 }
-
-.formRegister label {
-  margin: 0.5em 0 0.5em 0;
-}
-
-.message {
-  margin: 2em 0 0 0;
-}
-
-.message button {
-  border: none;
-  cursor: pointer;
-  background-color: inherit;
-  color: #019aa5;
-} */

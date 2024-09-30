@@ -6,17 +6,26 @@ import { EncurtatorResult } from '../../../models/encurtator';
 import { NgForOf } from '@angular/common';
 import { ModalComponent } from '../../../components/modal/modal.component';
 import { PopupComponent } from '../../../components/popup/popup.component';
+import { SpinnerComponent } from '../../../components/spinner/spinner.component';
 
 @Component({
   selector: 'app-shortened-list',
   standalone: true,
-  imports: [PageLayoutComponent, NgForOf, ModalComponent, PopupComponent],
+  imports: [
+    PageLayoutComponent,
+    NgForOf,
+    ModalComponent,
+    PopupComponent,
+    SpinnerComponent,
+  ],
   templateUrl: './shortened-list.component.html',
   styleUrl: './shortened-list.component.css',
 })
 export class ShortenedListComponent implements OnInit {
+  messageError: string | null = null;
   modal: EncurtatorResult | null = null;
   encurtators: EncurtatorResult[] = [];
+  loading = false;
   constructor(private service: ApiService, private authService: AuthService) {}
 
   onModal(encurtator: EncurtatorResult) {
@@ -41,9 +50,12 @@ export class ShortenedListComponent implements OnInit {
   ngOnInit(): void {
     const loggedAccount = this.authService.getAccount();
     if (loggedAccount !== null) {
+      this.loading = true;
       this.service.getEncurtatorsbyId(loggedAccount).subscribe({
-        next: (arrayEnc) => (this.encurtators = arrayEnc),
-        error: (err) => console.error(err),
+        next: (arrayEnc) => (
+          (this.encurtators = arrayEnc), (this.loading = false)
+        ),
+        error: (err) => ((this.messageError = err), (this.loading = false)),
       });
     }
   }

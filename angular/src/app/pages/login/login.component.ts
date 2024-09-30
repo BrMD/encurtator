@@ -11,15 +11,17 @@ import { Account } from '../../models/account';
 import { ApiService } from '../../service/api.service';
 import { NgIf } from '@angular/common';
 import { AuthService } from '../../service/auth.service';
+import { SpinnerComponent } from '../../components/spinner/spinner.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [PageLayoutComponent, ReactiveFormsModule, NgIf],
+  imports: [PageLayoutComponent, ReactiveFormsModule, NgIf, SpinnerComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
+  loading = false;
   constructor(
     private router: Router,
     private formBuilder: NonNullableFormBuilder,
@@ -49,6 +51,7 @@ export class LoginComponent {
         email: this.formLogin.get('email')!.value!,
         password: this.formLogin.get('password')!.value!,
       };
+      this.loading = true;
       this.service.login(loginData).subscribe({
         error: (err) => console.log(err),
         next: (session) => {

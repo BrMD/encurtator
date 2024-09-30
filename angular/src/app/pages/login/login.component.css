@@ -94,3 +94,7 @@
 .formLogin button:hover {
   background-color: #017a83;
 }
+
+.spinnerContainer {
+  margin-top: 1em;
+}

@@ -12,15 +12,17 @@ import { Account } from '../../models/account';
 import { confirmPasswordValidator } from './customValidatorConfirmPassword';
 import { NgIf } from '@angular/common';
 import { AuthService } from '../../service/auth.service';
+import { SpinnerComponent } from '../../components/spinner/spinner.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [PageLayoutComponent, ReactiveFormsModule, NgIf],
+  imports: [PageLayoutComponent, ReactiveFormsModule, NgIf, SpinnerComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
 export class RegisterComponent {
+  loading = false;
   constructor(
     private router: Router,
     private formBuilder: NonNullableFormBuilder,
@@ -59,6 +61,7 @@ export class RegisterComponent {
       };
       const confirmPassword = this.formRegister.get('confirmPassword')?.value;
       if (confirmPassword && confirmPassword === registerData.password) {
+        this.loading = true;
         this.service.createUser(registerData).subscribe({
           error: () => console.log('error'),
           complete: () => {

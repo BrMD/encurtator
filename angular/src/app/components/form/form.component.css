@@ -73,3 +73,11 @@
   font-weight: 700;
   font-style: normal;
 }
+
+.spinnerContainer {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1em;
+}

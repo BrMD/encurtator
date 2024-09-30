@@ -1,8 +1,13 @@
 <app-page-layout>
-  <app-popup></app-popup>
+  @if(messageError!==null){
+  <app-popup message="{{ messageError }}"></app-popup>
+  }
 
   <div class="shortenedMain">
     <span class="title">List of Links</span>
+    @if(loading){
+    <app-spinner></app-spinner>
+    }
     <ul class="encurtatorList" *ngFor="let encurtator of encurtators">
       <li class="encurtator" (click)="onClickCopy(encurtator.shortUrl)">
         <span class="linkShort">encurtator.com/{{ encurtator.shortUrl }}</span>

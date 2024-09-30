@@ -10,15 +10,19 @@ import { NgFor, NgIf } from '@angular/common';
 import { ApiService } from '../../service/api.service';
 import { AuthService } from '../../service/auth.service';
 import { EncurtatorPost } from '../../models/encurtator';
+import { SpinnerComponent } from '../spinner/spinner.component';
+import { PopupComponent } from '../popup/popup.component';
 
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [NgIf, ReactiveFormsModule, NgFor],
+  imports: [NgIf, ReactiveFormsModule, NgFor, SpinnerComponent, PopupComponent],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css',
 })
 export class FormComponent {
+  loading = true;
+  messageError: string | null = null;
   constructor(
     private apiService: ApiService,
     private formBuilder: NonNullableFormBuilder,
@@ -41,13 +45,16 @@ export class FormComponent {
     const sessionId = this.authService.getAccount();
     const inputLinkaux = this.formInputLink.get('inputLink')?.value;
     if (sessionId && inputLinkaux) {
+      this.loading = true;
       const encurtatorReq: EncurtatorPost = {
         sessionId: sessionId,
         longUrl: inputLinkaux,
       };
       this.apiService.createEncurtator(encurtatorReq).subscribe({
-        next: (encurted) => (this.shortened = encurted.shortUrl),
-        error: (error) => console.error(error),
+        next: (encurted) => (
+          (this.shortened = encurted.shortUrl), (this.loading = false)
+        ),
+        error: (error) => (console.error(error), (this.loading = false)),
       });
     }
   }

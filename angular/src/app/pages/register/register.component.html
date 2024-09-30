@@ -40,6 +40,11 @@
       </div>
       <button type="submit">Submit</button>
     </form>
+    @if(loading){
+    <div class="spinnerContainer">
+      <app-spinner></app-spinner>
+    </div>
+    }
     <div class="message">
       <span>Already have an account? </span>
       <button class="buttonLink" (click)="onLogin()">Log in</button>

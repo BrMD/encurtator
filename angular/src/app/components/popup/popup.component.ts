@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, input } from '@angular/core';
 
 @Component({
   selector: 'app-popup',
@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './popup.component.css',
 })
 export class PopupComponent implements OnInit {
+  @Input() message = '';
   ngOnInit(): void {
     setTimeout(function () {
       document.getElementById('progressBar')!.classList.add('shrink');
