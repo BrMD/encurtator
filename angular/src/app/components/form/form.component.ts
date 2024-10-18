@@ -21,7 +21,7 @@ import { PopupComponent } from '../popup/popup.component';
   styleUrl: './form.component.css',
 })
 export class FormComponent {
-  loading = true;
+  loading = false;
   messageError: string | null = null;
   constructor(
     private apiService: ApiService,

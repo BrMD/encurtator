@@ -28,8 +28,7 @@ export class ApiService {
   }
 
   createUser(User: Account) {
-    const a = this.httpClient.post<Account>(`${this.API}/createUser`, User);
-    return a;
+    return this.httpClient.post<Account>(`${this.API}/createUser`, User);
   }
 
   getEncurtatorsbyId(id: string) {

@@ -64,10 +64,13 @@ export class RegisterComponent {
         this.loading = true;
         this.service.createUser(registerData).subscribe({
           error: () => console.log('error'),
-          complete: () => {
-            this.service.createUser(registerData);
-            this.authService.setAccount(registerData.email);
-            this.router.navigate(['/']);
+          next: (user) => {
+            this.service.login(user).subscribe({
+              next: (sessionId) => {
+                this.authService.setAccount(sessionId.sessionId);
+                this.router.navigate(['/']);
+              },
+            });
           },
         });
       }

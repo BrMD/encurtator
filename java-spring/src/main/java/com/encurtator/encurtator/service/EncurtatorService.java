@@ -43,7 +43,6 @@ public class EncurtatorService {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
         this.sessionRepository = sessionRepository;
-
     }
 
     public List<EncurtatorDto> list(UUID id){
@@ -125,6 +124,7 @@ public class EncurtatorService {
         u.setPrivateKey(keypair.getPrivate().getEncoded());
         u.setPublicKey(keypair.getPublic().getEncoded());
         userRepository.save(u);
+    
         return userMapper.toDto(u);
     }
     

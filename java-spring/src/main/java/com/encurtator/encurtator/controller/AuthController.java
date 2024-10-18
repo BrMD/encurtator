@@ -40,7 +40,6 @@ public class AuthController {
 
     @DeleteMapping("/logout/{sessionId}")
     public void logout(@PathVariable @NotNull UUID sessionId)throws Exception{
-        System.out.println(sessionId);
         authService.logout(sessionId);
     }
 }

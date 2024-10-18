@@ -34,8 +34,17 @@ public class AuthService {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\": \"User not found\"}");
         }
         String p1 = HashUtils.toHexString(user.getPassword());
-        String p2 = HashUtils.toHexString(HashUtils.getSha(userDto.password()));
-        if (p1.equals(p2)) {
+        if(userDto.password().length()<64){
+            String p2 = HashUtils.toHexString(HashUtils.getSha(userDto.password()));
+            if (p1.equals(p2)) {
+            Session session = new Session();
+            session.setUserId(user.getId());
+            sessionRepository.save(session);
+            return ResponseEntity.ok("{\"sessionId\": \"" + session.getSessionId().toString() + "\"}");
+            }
+        }
+        
+        if (p1.equals(userDto.password())) {
             Session session = new Session();
             session.setUserId(user.getId());
             sessionRepository.save(session);
