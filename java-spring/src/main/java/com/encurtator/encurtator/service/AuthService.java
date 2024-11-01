@@ -15,7 +15,7 @@ import com.encurtator.encurtator.model.Session;
 import com.encurtator.encurtator.model.User;
 import com.encurtator.encurtator.repository.SessionRepository;
 import com.encurtator.encurtator.repository.UserRepository;
-import com.encurtator.encurtator.utils.HashUtils;
+import com.encurtator.encurtator.utils.Utils;
 
 @Service
 @Validated
@@ -33,9 +33,9 @@ public class AuthService {
         if (user == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\": \"User not found\"}");
         }
-        String p1 = HashUtils.toHexString(user.getPassword());
+        String p1 = Utils.toHexString(user.getPassword());
         if(userDto.password().length()<64){
-            String p2 = HashUtils.toHexString(HashUtils.getSha(userDto.password()));
+            String p2 = Utils.toHexString(Utils.getSha(userDto.password()));
             if (p1.equals(p2)) {
             Session session = new Session();
             session.setUserId(user.getId());

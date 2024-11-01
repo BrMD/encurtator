@@ -12,10 +12,11 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
+import java.util.UUID;
 
 import javax.crypto.Cipher;
 
-public class HashUtils {
+public class Utils {
 
     public static String toHexString(byte[] hash){
         BigInteger number = new BigInteger(1, hash);
@@ -30,6 +31,15 @@ public class HashUtils {
     public static byte[] getSha(String input) throws NoSuchAlgorithmException{
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         return md.digest(input.getBytes(StandardCharsets.UTF_8));
+    }
+
+    public static boolean isValidUUID(String uuid) {
+        try {
+            UUID.fromString(uuid);
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
     }
 
     public static String encryptUrl(String url, PublicKey publicKey)throws Exception{

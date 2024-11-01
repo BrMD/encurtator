@@ -4,14 +4,14 @@ import org.springframework.stereotype.Component;
 
 import com.encurtator.encurtator.dto.UserDto;
 import com.encurtator.encurtator.model.User;
-import com.encurtator.encurtator.utils.HashUtils;
+import com.encurtator.encurtator.utils.Utils;
 
 @Component
 public class UserMapper {
 
     public UserDto toDto(User user){
         if(user == null) return null;
-        return new UserDto(user.getId(), user.getEmail(), HashUtils.toHexString(user.getPassword()));
+        return new UserDto(user.getId(), user.getEmail(), Utils.toHexString(user.getPassword()));
     }
 
     public User toEntity(UserDto userDto) throws Exception{
@@ -19,7 +19,7 @@ public class UserMapper {
         User user = new User();
         if(userDto.id() != null)user.setId(userDto.id());
         user.setEmail(userDto.email());
-        user.setPassword(HashUtils.getSha(userDto.password()));
+        user.setPassword(Utils.getSha(userDto.password()));
         return user;
     }
 }

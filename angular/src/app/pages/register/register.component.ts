@@ -1,3 +1,4 @@
+import { errorResponse } from '../../models/errorResponse';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PageLayoutComponent } from '../../encurtator/layout/page-layout/page-layout.component';
@@ -23,6 +24,7 @@ import { SpinnerComponent } from '../../components/spinner/spinner.component';
 })
 export class RegisterComponent {
   loading = false;
+  errorShow: errorResponse | null = null;
   constructor(
     private router: Router,
     private formBuilder: NonNullableFormBuilder,
@@ -53,7 +55,8 @@ export class RegisterComponent {
   get confirmPassword() {
     return this.formRegister.get('confirmPassword') as FormControl;
   }
-  onSubmitLogin() {
+  onSubmitCreate() {
+    this.errorShow = null;
     if (this.formRegister.valid) {
       const registerData: Account = {
         email: this.formRegister.get('email')!.value!,
@@ -63,7 +66,7 @@ export class RegisterComponent {
       if (confirmPassword && confirmPassword === registerData.password) {
         this.loading = true;
         this.service.createUser(registerData).subscribe({
-          error: () => console.log('error'),
+          error: (e: errorResponse) => (this.errorShow = e),
           next: (user) => {
             this.service.login(user).subscribe({
               next: (sessionId) => {

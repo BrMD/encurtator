@@ -2,7 +2,7 @@
   <main class="main">
     <form
       [formGroup]="formRegister"
-      (ngSubmit)="onSubmitLogin()"
+      (ngSubmit)="onSubmitCreate()"
       class="formRegister"
     >
       <label>E-mail</label>
@@ -18,7 +18,7 @@
       </div>
       }
       <label>Password</label>
-      <input formControlName="password" />
+      <input formControlName="password" type="password" />
       @if (password.touched) {
       <div class="divErrors">
         <label *ngIf="password?.hasError('required')">
@@ -28,7 +28,7 @@
       }
       <label> Confirm Password</label>
       <div class="divErrors">
-        <input formControlName="confirmPassword" />
+        <input formControlName="confirmPassword" type="password" />
         @if (confirmPassword.touched) {
         <label *ngIf="confirmPassword?.hasError('required')">
           this field is required
@@ -40,7 +40,11 @@
       </div>
       <button type="submit">Submit</button>
     </form>
-    @if(loading){
+    @if (errorShow) {
+    <div class="divErrors">
+      <label>{{ errorShow.error.error }}</label>
+    </div>
+    }@else if(loading){
     <div class="spinnerContainer">
       <app-spinner></app-spinner>
     </div>

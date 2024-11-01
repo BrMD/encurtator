@@ -24,7 +24,7 @@ import com.encurtator.encurtator.model.User;
 import com.encurtator.encurtator.repository.EncurtatorRepository;
 import com.encurtator.encurtator.repository.SessionRepository;
 import com.encurtator.encurtator.repository.UserRepository;
-import com.encurtator.encurtator.utils.HashUtils;
+import com.encurtator.encurtator.utils.Utils;
 
 import jakarta.validation.constraints.NotNull;
 
@@ -77,16 +77,21 @@ public class EncurtatorService {
         }).orElseThrow(() -> new RecordNotFoundException(id));
     }
     
-    public EncurtatorDto create(EncurtatorReqDto encurtatorReqDto) throws Exception{
+    public ResponseEntity<?> create(EncurtatorReqDto encurtatorReqDto) throws Exception{
+        if(encurtatorReqDto.sessionId() == null || !Utils.isValidUUID(encurtatorReqDto.sessionId().toString())){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                             .body("{\"error\": \"You have to be logged in to use the encurtator\"}");
+        }
         Encurtator enc = new Encurtator();
         Session sessionFinder = sessionRepository.findById(encurtatorReqDto.sessionId()).orElseThrow(() -> new RecordNotFoundException(encurtatorReqDto.sessionId()));
         User user = userRepository.findById(sessionFinder.getUserId()).orElseThrow(() -> new RecordNotFoundException(sessionFinder.getUserId()));
-        enc.setEncryptedUrl(HashUtils.encryptUrl(encurtatorReqDto.longUrl(), HashUtils.decodePublicKey(user.getPublicKey())));
+        enc.setEncryptedUrl(Utils.encryptUrl(encurtatorReqDto.longUrl(), Utils.decodePublicKey(user.getPublicKey())));
         enc.setShortUrl(convertUrl(enc.getEncryptedUrl()));
         enc.setCreatedAt(new Date());
         enc.setUserId(sessionFinder.getUserId());
         encurtatorRepository.save(enc);
-        return encurtatorMapper.toDto(enc);
+        return ResponseEntity.status(HttpStatus.CREATED).body(encurtatorMapper.toDto(enc));
+       
         
     }
 
@@ -116,16 +121,23 @@ public class EncurtatorService {
         
     }
     
-    public UserDto createUser(UserDto userDto) throws Exception{
-        User u = new User();
-        KeyPair keypair = genKeys();
-        u.setEmail(userDto.email());
-        u.setPassword(HashUtils.getSha(userDto.password()));
-        u.setPrivateKey(keypair.getPrivate().getEncoded());
-        u.setPublicKey(keypair.getPublic().getEncoded());
-        userRepository.save(u);
-    
-        return userMapper.toDto(u);
+    public ResponseEntity<?> createUser(UserDto userDto) throws Exception {
+    User u = new User();
+    KeyPair keypair = genKeys();
+
+    if (userRepository.existsByEmail(userDto.email())) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                             .body("{\"error\": \"Email already exists\"}");
     }
+
+    u.setEmail(userDto.email());
+    u.setPassword(Utils.getSha(userDto.password()));
+    u.setPrivateKey(keypair.getPrivate().getEncoded());
+    u.setPublicKey(keypair.getPublic().getEncoded());
+    userRepository.save(u);
+
+    UserDto createdUserDto = userMapper.toDto(u);
+    return ResponseEntity.status(HttpStatus.CREATED).body(createdUserDto);
+}
     
 }

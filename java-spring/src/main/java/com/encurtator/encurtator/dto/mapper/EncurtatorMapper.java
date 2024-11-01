@@ -9,7 +9,7 @@ import com.encurtator.encurtator.dto.EncurtatorDto;
 import com.encurtator.encurtator.model.Encurtator;
 import com.encurtator.encurtator.model.User;
 import com.encurtator.encurtator.repository.UserRepository;
-import com.encurtator.encurtator.utils.HashUtils;
+import com.encurtator.encurtator.utils.Utils;
 
 
 @Component
@@ -24,7 +24,7 @@ public class EncurtatorMapper {
         if(encurtator == null) return null;
         User user = userRepository.findById(encurtator.getUserId()).orElseThrow();
         return new EncurtatorDto(encurtator.getId(), encurtator.getshortUrl(), 
-        HashUtils.decryptUrl(encurtator.getEncryptedUrl(), HashUtils.decodePrivateKey(user.getPrivateKey())), 
+        Utils.decryptUrl(encurtator.getEncryptedUrl(), Utils.decodePrivateKey(user.getPrivateKey())), 
         encurtator.getUserId(), encurtator.getCreatedAt());
     }
 

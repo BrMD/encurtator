@@ -1,3 +1,4 @@
+import { errorResponse } from './../../models/errorResponse';
 import { Component, input } from '@angular/core';
 import {
   FormControl,
@@ -22,7 +23,7 @@ import { PopupComponent } from '../popup/popup.component';
 })
 export class FormComponent {
   loading = false;
-  messageError: string | null = null;
+  errorShow: errorResponse | null = null;
   constructor(
     private apiService: ApiService,
     private formBuilder: NonNullableFormBuilder,
@@ -41,6 +42,7 @@ export class FormComponent {
   }
   shortened: String | null = null;
   onSubmitUrlForm() {
+    this.errorShow = null;
     if (!this.formInputLink.valid) return;
     const sessionId = this.authService.getAccount();
     const inputLinkaux = this.formInputLink.get('inputLink')?.value;
@@ -54,7 +56,9 @@ export class FormComponent {
         next: (encurted) => (
           (this.shortened = encurted.shortUrl), (this.loading = false)
         ),
-        error: (error) => (console.error(error), (this.loading = false)),
+        error: (error: errorResponse) => (
+          (this.errorShow = error), (this.loading = false)
+        ),
       });
     }
   }

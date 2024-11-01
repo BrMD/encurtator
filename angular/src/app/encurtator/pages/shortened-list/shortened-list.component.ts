@@ -61,6 +61,6 @@ export class ShortenedListComponent implements OnInit {
   }
 
   onClickCopy(url: string) {
-    navigator.clipboard.writeText('encurtator.com/' + url);
+    navigator.clipboard.writeText('localhost:4200/r/' + url);
   }
 }

@@ -10,4 +10,5 @@ import com.encurtator.encurtator.model.User;
 
 public interface UserRepository  extends JpaRepository<User, UUID>{
     User findByEmail(String Email);
+    Boolean existsByEmail(String Email);
 }

@@ -1,6 +1,3 @@
-@if(messageError){
-<app-popup message="{{ messageError }}"></app-popup>
-}
 <form
   [formGroup]="formInputLink"
   (ngSubmit)="onSubmitUrlForm()"
@@ -23,7 +20,11 @@
 <div class="resultShort">
   <span>{{ shortened }}</span>
 </div>
-} @if(loading){
+}@if(errorShow){
+<div class="divErrors">
+  <label>{{ errorShow.error.error }}</label>
+</div>
+} @else if(loading){
 <div class="spinnerContainer">
   <app-spinner></app-spinner>
 </div>

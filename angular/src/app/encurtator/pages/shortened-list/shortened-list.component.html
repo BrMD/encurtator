@@ -10,7 +10,9 @@
     }
     <ul class="encurtatorList" *ngFor="let encurtator of encurtators">
       <li class="encurtator" (click)="onClickCopy(encurtator.shortUrl)">
-        <span class="linkShort">encurtator.com/{{ encurtator.shortUrl }}</span>
+        <span class="linkShort"
+          >localhost:4200/r/{{ encurtator.shortUrl }}</span
+        >
         <span class="longLink">{{ encurtator.encryptedUrl }}</span>
         <button (click)="onModal(encurtator)">delete</button>
       </li>

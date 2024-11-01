@@ -45,7 +45,7 @@ public class EncurtatorController {
 
     @PostMapping("/encurtator")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public EncurtatorDto create(@RequestBody @Valid @NotNull EncurtatorReqDto encurtatorReqDto) throws Exception{
+    public ResponseEntity<?> create(@RequestBody @Valid @NotNull EncurtatorReqDto encurtatorReqDto) throws Exception{
         System.out.println(encurtatorReqDto);
         return encurtatorService.create(encurtatorReqDto);
     }
@@ -57,7 +57,7 @@ public class EncurtatorController {
     }
 
     @PostMapping("/createUser")
-    public UserDto createUser(@RequestBody UserDto userDto)throws Exception{
+    public ResponseEntity<?> createUser(@RequestBody UserDto userDto)throws Exception{
         return encurtatorService.createUser(userDto);
     }
 
