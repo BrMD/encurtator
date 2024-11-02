@@ -41,10 +41,7 @@ export class ShortenedListComponent implements OnInit {
   }
 
   onDelete(id: String) {
-    this.service.deleteEncurtator(id).subscribe({
-      next: () => console.log('aooo'),
-      error: (err) => console.error(err),
-    });
+    this.service.deleteEncurtator(id).subscribe({});
   }
 
   ngOnInit(): void {

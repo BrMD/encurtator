@@ -12,7 +12,6 @@ import { ApiService } from '../../service/api.service';
 export class RedirectComponent implements OnInit {
   constructor(private service: ApiService, private router: Router) {}
   ngOnInit(): void {
-    console.log(this.router.url.split('/r/')[1]);
     this.service.redirect(this.router.url.split('/r/')[1]).subscribe({
       next: (response) => (window.location.href = response.url),
       error: (err) => this.router.navigate(['/']),

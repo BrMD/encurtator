@@ -24,6 +24,5 @@ export class ModalComponent {
 
   onConfirmFalse() {
     this.confirmation.emit(false);
-    console.log(this.item);
   }
 }

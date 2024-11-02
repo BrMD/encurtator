@@ -32,7 +32,6 @@ export class ApiService {
   }
 
   getEncurtatorsbyId(id: string) {
-    console.log(id);
     return this.httpClient.get<Array<EncurtatorResult>>(
       `${this.API}/encurtator/all/${id}`
     );

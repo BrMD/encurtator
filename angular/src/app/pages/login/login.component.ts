@@ -53,7 +53,6 @@ export class LoginComponent {
       };
       this.loading = true;
       this.service.login(loginData).subscribe({
-        error: (err) => console.log(err),
         next: (session) => {
           this.authService.setAccount(session.sessionId);
           this.router.navigate(['/']);

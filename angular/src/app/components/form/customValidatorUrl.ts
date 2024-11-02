@@ -3,8 +3,6 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 export const confirmUrlValidator: ValidatorFn = (
   control: AbstractControl
 ): ValidationErrors | null => {
-  console.log(control.value.inputLink.match(regex));
-
   return control.value.inputLink.match(regex) ? null : { UrlNotValid: true };
 };
 
